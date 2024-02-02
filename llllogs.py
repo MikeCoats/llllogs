@@ -31,7 +31,7 @@ __maintainer__ = "Mike Coats"
 __email__ = "i.am@mikecoats.com"
 
 __status__ = "Production"
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 
 import hashlib
@@ -66,18 +66,18 @@ class User:
 
     @property
     def hashed_remote(self):
-        """Get a SHA1 hashed copy of the visitor's IP."""
-        return hashlib.sha1(self.remote.encode("utf-8")).hexdigest()
+        """Get a SHA3-224 hashed copy of the visitor's IP."""
+        return hashlib.sha3_224(self.remote.encode("utf-8")).hexdigest()
 
     @property
     def hashed_referer(self):
-        """Get a SHA1 hashed copy of the visitor's last page."""
-        return hashlib.sha1(self.referer.encode("utf-8")).hexdigest()
+        """Get a SHA3-224 hashed copy of the visitor's last page."""
+        return hashlib.sha3_224(self.referer.encode("utf-8")).hexdigest()
 
     @property
     def hashed_agent(self):
-        """Get a SHA1 hashed copy of the visitor's browser."""
-        return hashlib.sha1(self.agent.encode("utf-8")).hexdigest()
+        """Get a SHA3-224 hashed copy of the visitor's browser."""
+        return hashlib.sha3_224(self.agent.encode("utf-8")).hexdigest()
 
 
 @dataclass
