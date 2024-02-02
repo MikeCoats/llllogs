@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug llllogs",
+            "type": "python",
+            "request": "launch",
+            "program": "llllogs.py",
+            "args": [
+                "demo.log"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "preLaunchTask": "rm-db"
+        }
+    ]
+}

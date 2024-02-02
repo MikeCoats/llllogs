@@ -1,0 +1,10 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "rm-db",
+            "type": "shell",
+            "command": "rm logs.db || true",
+        }
+    ]
+}
