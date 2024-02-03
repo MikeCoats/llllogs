@@ -31,7 +31,7 @@ __maintainer__ = "Mike Coats"
 __email__ = "i.am@mikecoats.com"
 
 __status__ = "Production"
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 
 import hashlib
@@ -205,12 +205,12 @@ def main():
     input_files = sys.argv[1:]
     for input_file in input_files:
         print("Reading " + input_file + "...")
-        with open(input_file, "r", encoding="utf-8") as f:
-            contents = f.readlines()
-            entries = parser.parse_lines(contents)
+        with open(input_file, "r", encoding="utf-8") as file:
+            contents = file.readlines()
+            lines = parser.parse_lines(contents)
 
-            for e in entries:
-                request = e.request_line
+            for line in lines:
+                request = line.request_line
                 request_parts = request.split(" ")
                 url = request_parts[1]
                 url_parts = url.split("?")
@@ -218,20 +218,20 @@ def main():
                 write_log_line(
                     con,
                     LogLine(
-                        Server(vhost=e.virtual_host, port=e.server_port),
+                        Server(vhost=line.virtual_host, port=line.server_port),
                         User(
-                            remote=e.remote_host,
-                            referer=e.headers_in["Referer"] or "",
-                            agent=e.headers_in["User-agent"] or "",
+                            remote=line.remote_host,
+                            referer=line.headers_in["Referer"] or "",
+                            agent=line.headers_in["User-agent"] or "",
                         ),
                         Request(
-                            time=e.request_time,
+                            time=line.request_time,
                             method=request_parts[0],
                             path=url_parts[0],
                             params=url_parts[1] if len(url_parts) > 1 else "",
                             http=request_parts[2],
-                            status=e.final_status,
-                            bytes=e.bytes_out,
+                            status=line.final_status,
+                            bytes=line.bytes_out,
                         ),
                     ),
                 )
